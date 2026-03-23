@@ -13,5 +13,14 @@ pipeline {
                 sh './mvnw test'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                pkill -f 'java -jar' || true
+                nohup java -jar target/*.jar > app.log 2>&1 &
+                '''
+            }
+        }
     }
 }
