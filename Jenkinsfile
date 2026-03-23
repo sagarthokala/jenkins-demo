@@ -15,13 +15,13 @@ pipeline {
         }
 
         stage('Deploy') {
-             steps {
-                 sh '''
-                 pkill -f 'java -jar' || true
-                 nohup java -jar target/*.jar --server.port=8081 > app.log 2>&1 &
-                 disown
-                 '''
-             }
-         }
+            steps {
+                sh '''
+                pkill -f 'OrderService' || true
+                nohup java -jar target/OrderService-0.0.1-SNAPSHOT.jar --server.port=8081 > app.log 2>&1 &
+                sleep 5
+                '''
+            }
+        }
     }
 }
