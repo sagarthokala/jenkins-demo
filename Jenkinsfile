@@ -23,5 +23,15 @@ pipeline {
                 '''
             }
         }
+
+        stage('Run Container') {
+            steps {
+                sh '''
+                docker stop orderservice || true
+                docker rm orderservice || true
+                docker run -d -p 8082:8081 --name orderservice orderservice
+                '''
+            }
+        }
     }
 }
