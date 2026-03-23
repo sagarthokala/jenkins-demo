@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: OrderService
+
+server:
+  port: 8081
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      paymentService:
+        failureRateThreshold: 50 # Opens when 50% of calls fail
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: 2000ms # 2 seconds
+        permittedNumberOfCallsInHalfOpenState: 2
+        waitDurationInOpenState: 5000ms # 5 seconds
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
