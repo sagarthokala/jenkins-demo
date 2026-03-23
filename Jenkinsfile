@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        sstage('Deploy') {
+        stage('Deploy') {
              steps {
                  sh '''
                  pkill -f 'java -jar' || true
